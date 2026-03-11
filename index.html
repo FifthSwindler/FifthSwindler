@@ -194,7 +194,6 @@ h1{
 .spotify-title{
     font-size:14px;
     font-weight:600;
-
     overflow:hidden;
     white-space:nowrap;
     position:relative;
@@ -202,6 +201,9 @@ h1{
 
 .spotify-title span{
     display:inline-block;
+}
+
+.spotify-title.scroll span{
     padding-left:100%;
     animation:scrollText 10s linear infinite;
 }
@@ -342,6 +344,16 @@ async function update(){
 
     cover.src = s.album_art_url;
     title.textContent = s.song;
+
+const titleContainer = title.parentElement;
+
+setTimeout(() => {
+    if (title.scrollWidth > titleContainer.clientWidth) {
+        titleContainer.classList.add("scroll");
+    } else {
+        titleContainer.classList.remove("scroll");
+    }
+}, 100);
     artist.textContent = `${s.artist} • ${s.album}`;
 
     bg.style.backgroundImage = `url(${s.album_art_url})`;
