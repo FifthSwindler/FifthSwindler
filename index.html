@@ -4,215 +4,237 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>blewd</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
 <style>
 
+:root{
+    --bg:#000;
+    --card:rgba(20,20,20,.6);
+    --border:#222;
+}
+
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Inter',sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Inter",sans-serif;
 }
 
 body{
-height:100vh;
-background:radial-gradient(circle at top,#0a0a0a 0%,#000 100%);
-display:flex;
-justify-content:center;
-align-items:center;
-color:white;
-overflow:hidden;
-position:relative;
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:#fff;
+    background:radial-gradient(circle at top,#0a0a0a 0%,#000 100%);
+    overflow:hidden;
 }
 
-.activity-bg{
-position:fixed;
-inset:0;
-background-size:cover;
-background-position:center;
-filter:blur(6px) brightness(.35);
-transform:scale(1.2);
-z-index:-2;
-opacity:0;
-transition:opacity .6s ease;
+.spotify-bg{
+    position:fixed;
+    inset:0;
+    z-index:-2;
+
+    background-size:cover;
+    background-position:center;
+
+    filter:blur(10px) brightness(.35);
+    transform:scale(1.2);
+
+    opacity:0;
+    transition:opacity .7s ease;
 }
 
-.activity-bg.active{
-opacity:1;
+.spotify-bg.active{
+    opacity:1;
 }
 
 body::before{
-content:"";
-position:absolute;
-width:700px;
-height:700px;
-background:#111;
-filter:blur(220px);
-opacity:.4;
-animation:pulse 8s infinite alternate;
-z-index:-1;
+    content:"";
+    position:absolute;
+
+    width:700px;
+    height:700px;
+
+    background:#111;
+    filter:blur(220px);
+    opacity:.4;
+
+    animation:pulse 8s infinite alternate;
+    z-index:-1;
 }
 
 @keyframes pulse{
-from{transform:scale(1)}
-to{transform:scale(1.25)}
+    from{transform:scale(1)}
+    to{transform:scale(1.25)}
 }
 
 .card{
-background:rgba(20,20,20,.6);
-backdrop-filter:blur(20px);
-padding:40px;
-border-radius:25px;
-text-align:center;
-width:380px;
-box-shadow:0 0 40px rgba(255,255,255,.05);
-animation:fadeIn 1s ease forwards;
-}
+    width:380px;
+    padding:40px;
 
-@keyframes fadeIn{
-from{opacity:0;transform:translateY(30px)}
-to{opacity:1;transform:translateY(0)}
-}
+    text-align:center;
 
-/* avatar */
+    border-radius:25px;
+    background:var(--card);
+    backdrop-filter:blur(20px);
+
+    box-shadow:0 0 40px rgba(255,255,255,.05);
+}
 
 .avatar-wrapper{
-position:relative;
-display:inline-block;
+    position:relative;
+    display:inline-block;
 }
 
 .avatar{
-width:110px;
-height:110px;
-border-radius:50%;
-border:3px solid #222;
+    width:110px;
+    height:110px;
+    border-radius:50%;
+    border:3px solid var(--border);
 }
 
 .status-dot{
-position:absolute;
-bottom:6px;
-right:6px;
-width:18px;
-height:18px;
-border-radius:50%;
-border:3px solid #111;
+    position:absolute;
+    bottom:8px;
+    right:8px;
+
+    width:18px;
+    height:18px;
+    border-radius:50%;
+    border:3px solid #111;
 }
 
 h1{
-font-weight:800;
-font-size:26px;
-margin-top:15px;
+    margin-top:15px;
+    font-size:26px;
+    font-weight:800;
 }
 
 .bio{
-font-weight:300;
-font-size:14px;
-opacity:.7;
-margin-bottom:20px;
+    margin-top:4px;
+    margin-bottom:18px;
+
+    font-size:14px;
+    font-weight:300;
+    opacity:.7;
 }
 
 .buttons{
-display:flex;
-justify-content:center;
-gap:18px;
-margin-top:15px;
+    display:flex;
+    justify-content:center;
+    gap:18px;
 }
 
 .btn{
-width:48px;
-height:48px;
-border-radius:14px;
-background:rgba(255,255,255,.05);
-display:flex;
-justify-content:center;
-align-items:center;
-transition:.25s;
+    width:48px;
+    height:48px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:14px;
+    background:rgba(255,255,255,.05);
+
+    transition:.25s;
 }
 
 .btn svg{
-width:22px;
-height:22px;
-fill:white;
-opacity:.8;
+    width:22px;
+    height:22px;
+    fill:white;
+    opacity:.8;
 }
 
 .btn:hover{
-transform:translateY(-4px);
-background:#111;
-box-shadow:0 0 20px rgba(255,255,255,.1);
+    transform:translateY(-4px);
+    background:#111;
+    box-shadow:0 0 20px rgba(255,255,255,.1);
 }
 
-.activity{
-margin-top:20px;
-display:none;
-align-items:center;
-gap:15px;
-background:rgba(255,255,255,.04);
-padding:12px;
-border-radius:15px;
+.spotify{
+    margin-top:22px;
+
+    display:none;
+    gap:15px;
+    align-items:center;
+
+    padding:12px;
+    border-radius:15px;
+
+    background:rgba(255,255,255,.04);
 }
 
-.activity img{
-width:80px;
-height:80px;
-border-radius:12px;
-object-fit:cover;
+.spotify img{
+    width:80px;
+    height:80px;
+
+    border-radius:12px;
+    object-fit:cover;
 }
 
-.activity-info{
-display:flex;
-flex-direction:column;
-width:100%;
-overflow:hidden;
+.spotify-info{
+    flex:1;
+    text-align:left;
 }
 
-.activity-title{
-font-weight:600;
-font-size:14px;
-white-space:nowrap;
-overflow:hidden;
-text-overflow:ellipsis;
+.spotify-title{
+    font-size:14px;
+    font-weight:600;
+
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
 }
 
-.activity-sub{
-font-size:13px;
-opacity:.7;
-white-space:nowrap;
-overflow:hidden;
-text-overflow:ellipsis;
+.spotify-artist{
+    font-size:13px;
+    opacity:.7;
+
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
 }
 
 .progress-bar{
-width:100%;
-height:4px;
-background:#222;
-border-radius:10px;
-margin-top:6px;
-overflow:hidden;
+    margin-top:6px;
+
+    height:4px;
+    width:100%;
+
+    border-radius:10px;
+    background:#222;
+
+    overflow:hidden;
 }
 
 .progress{
-height:100%;
-width:0%;
-background:white;
-transition:width 1s linear;
+    height:100%;
+    width:0%;
+    background:white;
+
+    transition:width 1s linear;
 }
 
 </style>
 </head>
 
+
 <body>
 
-<div id="activity-bg" class="activity-bg"></div>
+<div id="bg" class="spotify-bg"></div>
 
 <div class="card">
 
 <div class="avatar-wrapper">
 <img id="avatar" class="avatar">
-<div id="status-dot" class="status-dot"></div>
+<div id="status" class="status-dot"></div>
 </div>
 
 <h1>blewd</h1>
@@ -221,135 +243,95 @@ transition:width 1s linear;
 <div class="buttons">
 
 <a href="https://instagram.com/chainbail" class="btn" target="_blank">
-<svg viewBox="0 0 24 24">
-<path d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7zm5 5.2A4.8 4.8 0 1 1 7.2 12 4.8 4.8 0 0 1 12 7.2zm6.2-.8a1.2 1.2 0 1 1-1.2 1.2 1.2 1.2 0 0 1 1.2-1.2z"/>
-</svg>
+<svg viewBox="0 0 24 24"><path d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7zm5 5.2A4.8 4.8 0 1 1 7.2 12 4.8 4.8 0 0 1 12 7.2zm6.2-.8a1.2 1.2 0 1 1-1.2 1.2 1.2 1.2 0 0 1 1.2-1.2z"/></svg>
 </a>
 
 <a href="https://twitter.com/tqrkeja" class="btn" target="_blank">
-<svg viewBox="0 0 24 24">
-<path d="M18 2h3l-7.5 8.5L22 22h-6l-4.5-6-5.3 6H3l8-9L2 2h6l4 5.5L18 2z"/>
-</svg>
+<svg viewBox="0 0 24 24"><path d="M18 2h3l-7.5 8.5L22 22h-6l-4.5-6-5.3 6H3l8-9L2 2h6l4 5.5L18 2z"/></svg>
 </a>
 
 <a href="https://github.com/estrito" class="btn" target="_blank">
-<svg viewBox="0 0 24 24">
-<path d="M12 .5A12 12 0 0 0 0 12.8c0 5.6 3.6 10.3 8.6 12 .6.1.8-.3.8-.6v-2.2c-3.5.8-4.2-1.7-4.2-1.7-.6-1.6-1.4-2-1.4-2-1.2-.8.1-.8.1-.8 1.3.1 2 1.3 2 1.3 1.2 2 3.2 1.4 4 .9.1-.8.5-1.4.9-1.7-2.8-.3-5.7-1.5-5.7-6.5 0-1.4.5-2.5 1.3-3.4-.1-.3-.6-1.7.1-3.4 0 0 1-.3 3.4 1.3a11.5 11.5 0 0 1 6.2 0c2.4-1.6 3.4-1.3 3.4-1.3.7 1.7.2 3.1.1 3.4.8.9 1.3 2 1.3 3.4 0 5-2.9 6.2-5.7 6.5.5.4 1 1.2 1 2.4v3.6c0 .3.2.7.8.6A12 12 0 0 0 24 12.8 12 12 0 0 0 12 .5z"/>
-</svg>
+<svg viewBox="0 0 24 24"><path d="M12 .5A12 12 0 0 0 0 12.8c0 5.6 3.6 10.3 8.6 12 .6.1.8-.3.8-.6v-2.2c-3.5.8-4.2-1.7-4.2-1.7-.6-1.6-1.4-2-1.4-2-1.2-.8.1-.8.1-.8 1.3.1 2 1.3 2 1.3 1.2 2 3.2 1.4 4 .9.1-.8.5-1.4.9-1.7-2.8-.3-5.7-1.5-5.7-6.5 0-1.4.5-2.5 1.3-3.4-.1-.3-.6-1.7.1-3.4 0 0 1-.3 3.4 1.3a11.5 11.5 0 0 1 6.2 0c2.4-1.6 3.4-1.3 3.4-1.3.7 1.7.2 3.1.1 3.4.8.9 1.3 2 1.3 3.4 0 5-2.9 6.2-5.7 6.5.5.4 1 1.2 1 2.4v3.6c0 .3.2.7.8.6A12 12 0 0 0 24 12.8 12 12 0 0 0 12 .5z"/></svg>
 </a>
 
 </div>
 
-<div class="activity" id="activity">
 
-<img id="activity-cover">
+<div id="spotify" class="spotify">
 
-<div class="activity-info">
-<div class="activity-title" id="activity-title"></div>
-<div class="activity-sub" id="activity-sub"></div>
+<img id="cover">
+
+<div class="spotify-info">
+<div id="title" class="spotify-title"></div>
+<div id="artist" class="spotify-artist"></div>
 
 <div class="progress-bar">
-<div class="progress" id="progress"></div>
+<div id="progress" class="progress"></div>
 </div>
 
 </div>
 </div>
 
 </div>
+
 
 <script>
 
-const userId="265545151882067978";
+const userId = "265545151882067978";
 
-async function updateDiscord(){
+const avatar = document.getElementById("avatar");
+const status = document.getElementById("status");
 
-const res=await fetch(`https://api.lanyard.rest/v1/users/${userId}`);
-const json=await res.json();
-const data=json.data;
+const spotifyBox = document.getElementById("spotify");
+const cover = document.getElementById("cover");
+const title = document.getElementById("title");
+const artist = document.getElementById("artist");
+const progress = document.getElementById("progress");
+const bg = document.getElementById("bg");
 
-document.getElementById("avatar").src=
-`https://cdn.discordapp.com/avatars/${userId}/${data.discord_user.avatar}.png?size=256`;
-
-const statusColors={
-online:"#43b581",
-idle:"#faa61a",
-dnd:"#f04747",
-offline:"#747f8d"
+const statusColors = {
+    online:"#43b581",
+    idle:"#faa61a",
+    dnd:"#f04747",
+    offline:"#747f8d"
 };
 
-document.getElementById("status-dot").style.background=
-statusColors[data.discord_status];
+async function update(){
 
-const activityDiv=document.getElementById("activity");
-const bg=document.getElementById("activity-bg");
+    const res = await fetch(`https://api.lanyard.rest/v1/users/${userId}`);
+    const { data } = await res.json();
 
-if(data.listening_to_spotify){
+    avatar.src =
+        `https://cdn.discordapp.com/avatars/${userId}/${data.discord_user.avatar}.png?size=256`;
 
-const s=data.spotify;
+    status.style.background = statusColors[data.discord_status];
 
-activityDiv.style.display="flex";
+    if(!data.listening_to_spotify){
+        spotifyBox.style.display = "none";
+        bg.classList.remove("active");
+        return;
+    }
 
-document.getElementById("activity-cover").src=s.album_art_url;
-document.getElementById("activity-title").innerText=s.song;
-document.getElementById("activity-sub").innerText=`${s.artist} • ${s.album}`;
+    const s = data.spotify;
 
-bg.style.backgroundImage=`url(${s.album_art_url})`;
-bg.classList.add("active");
+    spotifyBox.style.display = "flex";
 
-const progress=((Date.now()-s.timestamps.start)/(s.timestamps.end-s.timestamps.start))*100;
+    cover.src = s.album_art_url;
+    title.textContent = s.song;
+    artist.textContent = `${s.artist} • ${s.album}`;
 
-document.getElementById("progress").style.width=progress+"%";
+    bg.style.backgroundImage = `url(${s.album_art_url})`;
+    bg.classList.add("active");
 
+    const percent =
+        (Date.now() - s.timestamps.start) /
+        (s.timestamps.end - s.timestamps.start) * 100;
+
+    progress.style.width = percent + "%";
 }
 
-else{
-
-const game=data.activities.find(a=>a.type===0);
-
-if(game){
-
-activityDiv.style.display="flex";
-
-let image="";
-
-if(game.assets?.large_image){
-
-if(game.assets.large_image.startsWith("mp:")){
-
-image=`https://media.discordapp.net/${game.assets.large_image.replace("mp:","")}`;
-
-}else{
-
-image=`https://cdn.discordapp.com/app-assets/${game.application_id}/${game.assets.large_image}.png`;
-
-}
-
-}
-
-document.getElementById("activity-cover").src=image;
-document.getElementById("activity-title").innerText=game.name;
-document.getElementById("activity-sub").innerText=game.details || "Playing";
-
-bg.style.backgroundImage=`url(${image})`;
-bg.classList.add("active");
-
-document.getElementById("progress").style.width="100%";
-
-}
-
-else{
-
-activityDiv.style.display="none";
-bg.classList.remove("active");
-
-}
-
-}
-
-}
-
-updateDiscord();
-setInterval(updateDiscord,10000);
+update();
+setInterval(update,10000);
 
 </script>
 
