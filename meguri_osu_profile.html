@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>meguri — osu! Profile</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
+body{background:#000;color:#fff;min-height:100vh}
+.bg{position:fixed;inset:0;background:radial-gradient(circle at top,#222,#000 60%);z-index:-2}
+.container{max-width:1200px;margin:auto;padding:24px}
+.card{background:rgba(20,20,20,.7);backdrop-filter:blur(20px);border-radius:24px;border:1px solid #222}
+.hero{padding:32px;display:flex;gap:24px;align-items:center}
+.avatar{width:140px;height:140px;border-radius:50%}
+.name{font-size:42px;font-weight:800}
+.sub{opacity:.7}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-top:20px}
+.stat{padding:20px}.label{opacity:.6;font-size:13px}.value{font-size:28px;font-weight:800;margin-top:8px}
+.section{margin-top:20px;padding:24px}
+.play{display:flex;justify-content:space-between;padding:12px;border-radius:12px;background:#111;margin-top:10px}
+.progress{height:8px;background:#222;border-radius:999px;overflow:hidden;margin-top:10px}
+.progress div{height:100%;width:75%;background:#fff}
+.badges{display:flex;gap:10px;flex-wrap:wrap}.badge{width:64px;height:64px;background:#111;border-radius:14px;display:grid;place-items:center}
+@media(max-width:700px){.hero{flex-direction:column;text-align:center}}
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<div class="container">
+
+<div class="card hero">
+<img class="avatar" id="avatar" src="https://a.ppy.sh/23598448">
+<div>
+<div class="name" id="username">meguri</div>
+<div class="sub">osu! standard player</div>
+</div>
+</div>
+
+<div class="grid">
+<div class="card stat"><div class="label">PP</div><div class="value" id="pp">--</div></div>
+<div class="card stat"><div class="label">Global Rank</div><div class="value" id="rank">--</div></div>
+<div class="card stat"><div class="label">Country Rank</div><div class="value" id="countryRank">--</div></div>
+<div class="card stat"><div class="label">Accuracy</div><div class="value" id="acc">--</div></div>
+<div class="card stat"><div class="label">Play Count</div><div class="value" id="plays">--</div></div>
+<div class="card stat"><div class="label">Level</div><div class="value" id="level">--</div><div class="progress"><div id="levelBar"></div></div></div>
+</div>
+
+<div class="card section">
+<h2>Top Plays</h2>
+<div id="topplays">
+<div class="play"><span>API data will appear here</span><span>--pp</span></div>
+</div>
+</div>
+
+<div class="card section">
+<h2>Recent Plays</h2>
+<div id="recent">
+<div class="play"><span>API data will appear here</span><span>--</span></div>
+</div>
+</div>
+
+<div class="card section">
+<h2>Badges</h2>
+<div class="badges">
+<div class="badge">🏆</div>
+<div class="badge">★</div>
+<div class="badge">◆</div>
+</div>
+</div>
+
+</div>
+
+<script>
+const USER_ID = 23598448;
+
+// Replace with your backend endpoint.
+// Example:
+// fetch(`/api/osu/${USER_ID}`)
+
+async function loadProfile(){
+  console.log("API-ready template. Connect your osu! backend here.");
+}
+
+loadProfile();
+</script>
+</body>
+</html>
