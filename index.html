@@ -177,6 +177,17 @@ h1{
     .osu-link{
     text-decoration:none;
     color:inherit;
+    display:block;
+}
+
+#osu{
+    transition:.25s;
+}
+
+#osu:hover{
+    transform:translateY(-4px);
+    background:#111;
+    box-shadow:0 0 20px rgba(255,255,255,.1);
 }
 
 #osu img{
@@ -184,6 +195,55 @@ h1{
     height:80px;
     border-radius:12px;
     object-fit:cover;
+}
+.osu-card{
+    gap:15px;
+    align-items:center;
+
+    padding:12px;
+    border-radius:15px;
+
+    background:rgba(255,255,255,.04);
+
+    width:100%;
+    transition:.25s;
+}
+
+.osu-card:hover{
+    transform:translateY(-4px);
+    background:#111;
+    box-shadow:0 0 20px rgba(255,255,255,.1);
+}
+
+.osu-avatar{
+    width:80px;
+    height:80px;
+
+    border-radius:12px;
+    object-fit:cover;
+}
+
+.osu-info{
+    flex:1;
+    min-width:0;
+    text-align:left;
+
+    display:flex;
+    flex-direction:column;
+}
+
+.osu-name{
+    font-size:14px;
+    font-weight:600;
+}
+
+.osu-description{
+    font-size:13px;
+    opacity:.7;
+
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
 }
 .spotify img{
     width:80px;
@@ -307,9 +367,6 @@ h1{
 </div>
 
 </div>
-</div>
-
-</div>
 
 <a
     id="osuLink"
@@ -317,26 +374,26 @@ h1{
     href="https://osu.ppy.sh/users/meguri"
     target="_blank"
 >
-    <div id="osu" class="spotify" style="margin-top:12px; display:flex;">
-        <img id="osuAvatar">
+    <div id="osu" class="osu-card" style="margin-top:12px;display:flex;">
 
-        <div class="spotify-info">
-            <div class="spotify-title">
-                <span id="osuName">meguri</span>
+        <img
+            src="https://a.ppy.sh/11787089"
+            alt="osu avatar"
+            class="osu-avatar"
+        >
+
+        <div class="osu-info">
+
+            <div class="osu-name">
+                <span>meguri</span>
             </div>
 
-            <div id="osuStats" class="spotify-artist">
-                osu! profile
+            <div class="osu-description">
+                osu! standard player
             </div>
 
-            <div class="progress-bar">
-                <div
-                    id="osuLevel"
-                    class="progress"
-                    style="width:100%;"
-                ></div>
-            </div>
         </div>
+
     </div>
 </a>
 
@@ -355,10 +412,6 @@ const title = document.getElementById("title");
 const artist = document.getElementById("artist");
 const progress = document.getElementById("progress");
 const bg = document.getElementById("bg");
-const osuAvatar = document.getElementById("osuAvatar");
-const osuName = document.getElementById("osuName");
-const osuStats = document.getElementById("osuStats");
-const osuLevel = document.getElementById("osuLevel");
 
 const statusColors = {
     online:"#43b581",
@@ -416,10 +469,8 @@ progress.style.width =
 }
 
 update();
-updateOsu();
 
 setInterval(update, 10000);
-setInterval(updateOsu, 60000);
     
     async function updateOsu() {
     try {
