@@ -174,6 +174,17 @@ h1{
     width:100%;
 }
 
+    .osu-link{
+    text-decoration:none;
+    color:inherit;
+}
+
+#osu img{
+    width:80px;
+    height:80px;
+    border-radius:12px;
+    object-fit:cover;
+}
 .spotify img{
     width:80px;
     height:80px;
@@ -300,6 +311,39 @@ h1{
 
 </div>
 
+</div>
+</div>
+
+<a
+    id="osuLink"
+    class="osu-link"
+    href="https://osu.ppy.sh/users/meguri"
+    target="_blank"
+>
+    <div id="osu" class="spotify" style="margin-top:12px; display:flex;">
+        <img id="osuAvatar">
+
+        <div class="spotify-info">
+            <div class="spotify-title">
+                <span id="osuName">meguri</span>
+            </div>
+
+            <div id="osuStats" class="spotify-artist">
+                osu! profile
+            </div>
+
+            <div class="progress-bar">
+                <div
+                    id="osuLevel"
+                    class="progress"
+                    style="width:100%;"
+                ></div>
+            </div>
+        </div>
+    </div>
+</a>
+
+</div>
 
 <script>
 
@@ -314,6 +358,10 @@ const title = document.getElementById("title");
 const artist = document.getElementById("artist");
 const progress = document.getElementById("progress");
 const bg = document.getElementById("bg");
+const osuAvatar = document.getElementById("osuAvatar");
+const osuName = document.getElementById("osuName");
+const osuStats = document.getElementById("osuStats");
+const osuLevel = document.getElementById("osuLevel");
 
 const statusColors = {
     online:"#43b581",
@@ -367,8 +415,50 @@ setTimeout(() => {
 }
 
 update();
-setInterval(update,10000);
+updateOsu();
 
+setInterval(update,10000);
+setInterval(updateOsu,60000);
+    
+    async function updateOsu() {
+    try {
+
+        const res = await fetch(
+            "https://score.respektive.pw/u/meguri"
+        );
+
+        const data = await res.json();
+
+        osuAvatar.src =
+            `https://a.ppy.sh/${data.user_id}`;
+
+        osuName.textContent = data.username;
+
+        osuStats.textContent =
+            `#${data.global_rank.toLocaleString()} • ${Math.round(data.pp_raw).toLocaleString()}pp`;
+
+        const levelPercent =
+            Math.min(
+                (data.level % 100),
+                100
+            );
+
+        osuLevel.style.width =
+            `${levelPercent}%`;
+
+    } catch {
+
+        osuAvatar.src =
+            "https://a.ppy.sh";
+
+        osuName.textContent = "meguri";
+
+        osuStats.textContent =
+            "osu! profile";
+
+        osuLevel.style.width = "100%";
+    }
+    }
 </script>
 
 </body>
