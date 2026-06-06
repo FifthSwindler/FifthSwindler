@@ -311,9 +311,6 @@ h1{
 
 </div>
 
-</div>
-</div>
-
 <a
     id="osuLink"
     class="osu-link"
@@ -379,8 +376,8 @@ async function update() {
 
         const { data } = await res.json();
 
-        avatar.src =
-            `https://cdn.discordapp.com/avatars/${userId}/${data.discord_user.avatar}.png?size=256`;
+avatar.src =
+    `https://cdn.discordapp.com/avatars/${userId}/${data.discord_user.avatar}.webp?size=512`;
 
         status.style.background =
             statusColors[data.discord_status];
@@ -410,7 +407,8 @@ async function update() {
             (s.timestamps.end - s.timestamps.start) *
             100;
 
-        progress.style.width = percent + "%";
+progress.style.width =
+    `${Math.max(0, Math.min(percent, 100))}%`;
 
     } catch (err) {
         console.error("Lanyard error:", err);
@@ -418,45 +416,44 @@ async function update() {
 }
 
 update();
+updateOsu();
 
 setInterval(update, 10000);
+setInterval(updateOsu, 60000);
     
     async function updateOsu() {
     try {
 
         const res = await fetch(
-            "https://score.respektive.pw/u/meguri"
+            "https://api.osekai.net/user/get_user_info.php?user=meguri"
         );
 
         const data = await res.json();
 
         osuAvatar.src =
-            `https://a.ppy.sh/${data.user_id}`;
+            `https://a.ppy.sh/${data.id}`;
 
-        osuName.textContent = data.username;
+        osuName.textContent =
+            data.username;
 
         osuStats.textContent =
-            `#${data.global_rank.toLocaleString()} • ${Math.round(data.pp_raw).toLocaleString()}pp`;
+            `#${Number(data.rank).toLocaleString()} • ${Math.round(data.pp).toLocaleString()}pp`;
 
         const levelPercent =
             Math.min(
-                (data.level % 100),
+                data.level % 100,
                 100
             );
 
         osuLevel.style.width =
             `${levelPercent}%`;
 
-    } catch {
+    } catch (err) {
 
-        osuAvatar.src =
-            "https://a.ppy.sh";
+        console.error("osu error:", err);
 
         osuName.textContent = "meguri";
-
-        osuStats.textContent =
-            "osu! profile";
-
+        osuStats.textContent = "osu! profile";
         osuLevel.style.width = "100%";
     }
     }
