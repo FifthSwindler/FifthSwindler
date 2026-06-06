@@ -1,46 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>blewd</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Inter",sans-serif;
+}
+
+body{
+    min-height:100vh;
+    overflow:hidden;
+    color:white;
+
+    background:
+    linear-gradient(
+        rgba(0,0,0,.55),
+        rgba(0,0,0,.8)
+    ),
+    url("https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1920&auto=format&fit=crop");
+
+    background-size:cover;
+    background-position:center;
+}
+
+#petals{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:0;
+}
+
+.petal{
+    position:absolute;
+    top:-50px;
+    color:#ffb7d5;
+    animation:fall linear forwards;
+    opacity:.9;
+}
+
+@keyframes fall{
+    from{
+        transform:
+        translateY(-50px)
+        translateX(0)
+        rotate(0deg);
+    }
+
+    to{
+        transform:
+        translateY(110vh)
+        translateX(150px)
+        rotate(720deg);
+    }
+}
+
+.hero{
+    position:relative;
+    z-index:1;
+
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.content{
+    text-align:center;
+    width:min(1000px,90%);
+}
+
+.glitch{
+    position:relative;
+
+    font-size:7rem;
+    font-weight:800;
+
+    letter-spacing:12px;
+    text-transform:uppercase;
+
+    text-shadow:
+    0 0 25px rgba(255,0,0,.35);
+}
+
+.glitch::before,
+.glitch::after{
+    content:attr(data-text);
+
+    position:absolute;
+    left:0;
+    top:0;
+
+    width:100%;
+    height:100%;
+}
+
+.glitch::before{
+    color:#ff0000;
+    opacity:.35;
+    transform:translateX(-3px);
+
+    animation:glitch1 4s infinite;
+}
+
+.glitch::after{
+    color:#ffffff;
+    opacity:.15;
+    transform:translateX(3px);
+
+    animation:glitch2 3s infinite;
+}
+
+@keyframes glitch1{
+    0%,100%{
+        transform:translateX(-3px);
+    }
+    50%{
+        transform:translateX(-8px);
+    }
+}
+
+@keyframes glitch2{
+    0%,100%{
+        transform:translateX(3px);
+    }
+    50%{
+        transform:translateX(8px);
+    }
+}
+
+.quote{
+    margin-top:12px;
+    opacity:.75;
+    font-style:italic;
+    font-size:1.1rem;
+}
+
+.menu{
+    margin:40px auto 0;
+
+    width:320px;
+
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.menu a{
+    text-decoration:none;
+    color:white;
+
+    background:
+    rgba(0,0,0,.35);
+
+    backdrop-filter:blur(10px);
+
+    border-left:4px solid #a30000;
+
+    padding:16px 20px;
+
+    text-align:left;
+
+    transition:.25s;
+}
+
+.menu a:hover{
+    background:#a30000;
+    transform:translateX(10px);
+}
+
+.profile-wrapper{
+    margin-top:40px;
+
+    display:flex;
+    justify-content:center;
+}
+
+.student-card{
+    width:420px;
+
+    display:flex;
+    align-items:center;
+    gap:18px;
+
+    text-decoration:none;
+    color:white;
+
+    background:
+    rgba(0,0,0,.45);
+
+    backdrop-filter:blur(12px);
+
+    border:1px solid rgba(255,255,255,.12);
+
+    padding:18px;
+
+    position:relative;
+
+    transition:.25s;
+}
+
+.student-card:hover{
+    transform:translateY(-6px);
+    border-color:#c00000;
+}
+
+.student-card::before{
+    content:"STUDENT PROFILE";
+
+    position:absolute;
+    top:10px;
+    right:12px;
+
+    font-size:.65rem;
+    letter-spacing:2px;
+
+    color:#ff4a4a;
+}
+
+.student-card img{
+    width:90px;
+    height:90px;
+
+    border-radius:12px;
+    object-fit:cover;
+}
+
+.student-info{
+    text-align:left;
+}
+
+.student-info h2{
+    font-size:1.8rem;
+}
+
+.student-info p{
+    opacity:.75;
+    margin-top:4px;
+}
+
+.student-info span{
+    display:inline-block;
+    margin-top:10px;
+
+    color:#ff5a5a;
+}
+
+.footer{
+    margin-top:30px;
+    opacity:.5;
+    font-size:.85rem;
+}
+
+@media(max-width:768px){
+
+.glitch{
+    font-size:4rem;
+}
+
+.student-card{
+    width:100%;
+}
+
+.menu{
+    width:100%;
+}
+
+}
+
+</style>
+</head>
+<body>
+
+<div id="petals"></div>
+
 <div class="hero">
-    <div class="overlay">
 
-        <h1>blewd</h1>
+<div class="content">
 
-        <p class="quote">
-            "can you understand me?"
-        </p>
+<h1
+    class="glitch"
+    data-text="BLEWD"
+>
+    BLEWD
+</h1>
 
-        <div class="socials">
+<p class="quote">
+    "can you understand me?"
+</p>
 
-            <a href="https://twitter.com/tqrkeja" target="_blank">
-                @tqrkeja
-            </a>
+<div class="menu">
 
-            <a href="https://instagram.com/chainbail" target="_blank">
-                @chainbail
-            </a>
+<a
+    href="https://twitter.com/tqrkeja"
+    target="_blank"
+>
+    TWITTER — @tqrkeja
+</a>
 
-        </div>
+<a
+    href="https://instagram.com/chainbail"
+    target="_blank"
+>
+    INSTAGRAM — @chainbail
+</a>
 
-        <a
-            href="https://osu.ppy.sh/users/23598448"
-            target="_blank"
-            class="student-card"
-        >
+<a
+    href="https://osu.ppy.sh/users/23598448"
+    target="_blank"
+>
+    OSU! PROFILE
+</a>
 
-            <img
-                src="https://a.ppy.sh/23598448"
-                alt="osu avatar"
-            >
-
-            <div>
-
-                <h2>meguri</h2>
-
-                <span>
-                    osu! standard player
-                </span>
-
-            </div>
-
-        </a>
-
-    </div>
 </div>
+
+<div class="profile-wrapper">
+
+<a
+    class="student-card"
+    href="https://osu.ppy.sh/users/23598448"
+    target="_blank"
+>
+
+<img
+    src="https://a.ppy.sh/23598448"
+    alt="meguri"
+>
+
+<div class="student-info">
+
+<h2>meguri</h2>
+
+<p>
+    osu! standard player
+</p>
+
+<span>
+    View Student Record →
+</span>
+
+</div>
+
+</a>
+
+</div>
+
+<div class="footer">
+    Akademi High School Database
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const petals =
+document.getElementById("petals");
+
+function createPetal(){
+
+    const petal =
+    document.createElement("div");
+
+    petal.className =
+    "petal";
+
+    petal.innerHTML =
+    "🌸";
+
+    petal.style.left =
+    Math.random()*100 + "vw";
+
+    petal.style.fontSize =
+    16 + Math.random()*20 + "px";
+
+    petal.style.animationDuration =
+    8 + Math.random()*8 + "s";
+
+    petals.appendChild(petal);
+
+    setTimeout(
+        ()=>petal.remove(),
+        16000
+    );
+}
+
+for(let i=0;i<20;i++){
+    setTimeout(
+        createPetal,
+        i*300
+    );
+}
+
+setInterval(
+    createPetal,
+    300
+);
+
+</script>
+
+</body>
+</html>
