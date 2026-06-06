@@ -21,7 +21,6 @@ body{background:#000;color:#fff;min-height:100vh}
 .play{display:flex;justify-content:space-between;padding:12px;border-radius:12px;background:#111;margin-top:10px}
 .progress{height:8px;background:#222;border-radius:999px;overflow:hidden;margin-top:10px}
 .progress div{height:100%;width:75%;background:#fff}
-.badges{display:flex;gap:10px;flex-wrap:wrap}.badge{width:64px;height:64px;background:#111;border-radius:14px;display:grid;place-items:center}
 @media(max-width:700px){.hero{flex-direction:column;text-align:center}}
 </style>
 </head>
@@ -61,11 +60,6 @@ body{background:#000;color:#fff;min-height:100vh}
 </div>
 
 <div class="card section">
-<h2>Badges</h2>
-<div class="badges">
-<div class="badge">🏆</div>
-<div class="badge">★</div>
-<div class="badge">◆</div>
 </div>
 </div>
 
@@ -79,7 +73,7 @@ const USER_ID = 23598448;
 // fetch(`/api/osu/${USER_ID}`)
 
 async function loadProfile(){
-  console.log("API-ready template. Connect your osu! backend here.");
+  console.log("API-ready");
 }
 
 loadProfile();
