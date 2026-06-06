@@ -370,55 +370,56 @@ const statusColors = {
     offline:"#747f8d"
 };
 
-async function update(){
+async function update() {
+    try {
 
-    const res = await fetch(`https://api.lanyard.rest/v1/users/${userId}`);
-    const { data } = await res.json();
+        const res = await fetch(
+            `https://api.lanyard.rest/v1/users/${userId}`
+        );
 
-    avatar.src =
-        `https://cdn.discordapp.com/avatars/${userId}/${data.discord_user.avatar}.png?size=256`;
+        const { data } = await res.json();
 
-    status.style.background = statusColors[data.discord_status];
+        avatar.src =
+            `https://cdn.discordapp.com/avatars/${userId}/${data.discord_user.avatar}.png?size=256`;
 
-    if(!data.listening_to_spotify){
-        spotifyBox.style.display = "none";
-        bg.classList.remove("active");
-        return;
+        status.style.background =
+            statusColors[data.discord_status];
+
+        if (!data.listening_to_spotify) {
+            spotifyBox.style.display = "none";
+            bg.classList.remove("active");
+            return;
+        }
+
+        const s = data.spotify;
+
+        spotifyBox.style.display = "flex";
+
+        cover.src = s.album_art_url;
+        title.textContent = s.song;
+        artist.textContent =
+            `${s.artist} • ${s.album}`;
+
+        bg.style.backgroundImage =
+            `url(${s.album_art_url})`;
+
+        bg.classList.add("active");
+
+        const percent =
+            (Date.now() - s.timestamps.start) /
+            (s.timestamps.end - s.timestamps.start) *
+            100;
+
+        progress.style.width = percent + "%";
+
+    } catch (err) {
+        console.error("Lanyard error:", err);
     }
-
-    const s = data.spotify;
-
-    spotifyBox.style.display = "flex";
-
-    cover.src = s.album_art_url;
-    title.textContent = s.song;
-
-const titleContainer = title.parentElement;
-
-setTimeout(() => {
-    if (title.scrollWidth > titleContainer.clientWidth) {
-        titleContainer.classList.add("scroll");
-    } else {
-        titleContainer.classList.remove("scroll");
-    }
-}, 100);
-    artist.textContent = `${s.artist} • ${s.album}`;
-
-    bg.style.backgroundImage = `url(${s.album_art_url})`;
-    bg.classList.add("active");
-
-    const percent =
-        (Date.now() - s.timestamps.start) /
-        (s.timestamps.end - s.timestamps.start) * 100;
-
-    progress.style.width = percent + "%";
 }
 
 update();
-updateOsu();
 
-setInterval(update,10000);
-setInterval(updateOsu,60000);
+setInterval(update, 10000);
     
     async function updateOsu() {
     try {
