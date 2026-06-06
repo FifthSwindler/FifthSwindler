@@ -1,322 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>blewd</title>
+<div class="hero">
+    <div class="overlay">
 
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+        <h1>blewd</h1>
 
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:"Fredoka",sans-serif;
-}
+        <p class="quote">
+            "can you understand me?"
+        </p>
 
-body{
-    min-height:100vh;
-    overflow:hidden;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+        <div class="socials">
 
-    background:
-    radial-gradient(circle at top,#ffd6ec,#ffb6d9 40%,#ff95c8);
+            <a href="https://twitter.com/tqrkeja" target="_blank">
+                @tqrkeja
+            </a>
 
-    color:#fff;
-}
-
-.hearts{
-    position:fixed;
-    inset:0;
-    overflow:hidden;
-    pointer-events:none;
-}
-
-.heart{
-    position:absolute;
-    font-size:24px;
-    animation:float linear infinite;
-    opacity:.5;
-}
-
-@keyframes float{
-    from{
-        transform:translateY(110vh) rotate(0deg);
-    }
-    to{
-        transform:translateY(-120px) rotate(360deg);
-    }
-}
-
-.container{
-    width:900px;
-    max-width:95%;
-}
-
-.logo{
-    text-align:center;
-    margin-bottom:30px;
-}
-
-.logo h1{
-    font-size:64px;
-    font-weight:600;
-    color:white;
-    text-shadow:
-    0 0 15px rgba(255,255,255,.6),
-    0 0 30px rgba(255,255,255,.3);
-}
-
-.logo p{
-    opacity:.9;
-}
-
-.grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:20px;
-}
-
-.card{
-    background:rgba(255,255,255,.25);
-    backdrop-filter:blur(18px);
-
-    border:2px solid rgba(255,255,255,.35);
-
-    border-radius:25px;
-    padding:25px;
-
-    box-shadow:
-    0 10px 30px rgba(0,0,0,.15);
-}
-
-.card h2{
-    margin-bottom:15px;
-}
-
-.socials{
-    display:flex;
-    flex-direction:column;
-    gap:15px;
-}
-
-.social{
-    text-decoration:none;
-    color:white;
-
-    background:rgba(255,255,255,.15);
-
-    padding:14px 18px;
-    border-radius:16px;
-
-    transition:.25s;
-}
-
-.social:hover{
-    transform:translateY(-4px);
-    background:rgba(255,255,255,.3);
-}
-
-.osu{
-    display:flex;
-    gap:18px;
-    align-items:center;
-}
-
-.osu img{
-    width:90px;
-    height:90px;
-    border-radius:18px;
-}
-
-.osu-info h3{
-    font-size:28px;
-}
-
-.osu-info p{
-    opacity:.85;
-}
-
-.footer{
-    margin-top:25px;
-    text-align:center;
-    opacity:.8;
-}
-
-@media(max-width:700px){
-
-.grid{
-    grid-template-columns:1fr;
-}
-
-.logo h1{
-    font-size:42px;
-}
-
-}
-</style>
-</head>
-<body>
-
-<div class="hearts" id="hearts"></div>
-
-<div class="container">
-
-    <div class="logo">
-        <h1>blewd ♡</h1>
-        <p>just monika.</p>
-    </div>
-
-    <div class="grid">
-
-        <div class="card">
-            <h2>Socials</h2>
-
-            <div class="socials">
-
-                <a
-                    class="social"
-                    href="https://twitter.com/tqrkeja"
-                    target="_blank"
-                >
-                    ♡ Twitter — @tqrkeja
-                </a>
-
-                <a
-                    class="social"
-                    href="https://instagram.com/chainbail"
-                    target="_blank"
-                >
-                    ♡ Instagram — @chainbail
-                </a>
-
-            </div>
-        </div>
-
-        <div class="card">
-
-            <h2>osu! Profile</h2>
-
-            <a
-                href="https://osu.ppy.sh/users/23598448"
-                target="_blank"
-                style="text-decoration:none;color:white"
-            >
-                <div class="osu">
-
-                    <img
-                        src="https://a.ppy.sh/23598448"
-                        alt="osu avatar"
-                    >
-
-                    <div class="osu-info">
-                        <h3>meguri</h3>
-                        <p>osu! standard player</p>
-                    </div>
-
-                </div>
+            <a href="https://instagram.com/chainbail" target="_blank">
+                @chainbail
             </a>
 
         </div>
 
+        <a
+            href="https://osu.ppy.sh/users/23598448"
+            target="_blank"
+            class="student-card"
+        >
+
+            <img
+                src="https://a.ppy.sh/23598448"
+                alt="osu avatar"
+            >
+
+            <div>
+
+                <h2>meguri</h2>
+
+                <span>
+                    osu! standard player
+                </span>
+
+            </div>
+
+        </a>
+
     </div>
-
-    <div class="footer">
-        made with love ♡
-    </div>
-
 </div>
-
-<script>
-
-const hearts=document.getElementById("hearts");
-
-for(let i=0;i<25;i++){
-
-    const h=document.createElement("div");
-
-    h.className="heart";
-    h.innerHTML="♡";
-
-    h.style.left=Math.random()*100+"vw";
-    h.style.animationDuration=
-        8+Math.random()*12+"s";
-
-    h.style.fontSize=
-        18+Math.random()*20+"px";
-
-    hearts.appendChild(h);
-}
-
-</script>
-
-</body>
-</html>
-<div id="recent">
-<div class="play">
-<span>Requires official osu! API</span>
-<span>--</span>
-</div>
-</div>
-
-</div>
-
-</div>
-
-<script>
-async function loadProfile() {
-
-    try {
-
-        const data = await fetch(
-            "https://api.osekai.net/user/get_user_info.php?user=meguri"
-        ).then(r => r.json());
-
-        document.getElementById("username").textContent =
-            data.username;
-
-        document.getElementById("avatar").src =
-            `https://a.ppy.sh/${data.id}`;
-
-        document.getElementById("pp").textContent =
-            Math.round(data.pp).toLocaleString() + "pp";
-
-        document.getElementById("rank").textContent =
-            "#" + Number(data.rank).toLocaleString();
-
-        document.getElementById("countryRank").textContent =
-            "#" + Number(data.country_rank).toLocaleString();
-
-        document.getElementById("acc").textContent =
-            Number(data.accuracy).toFixed(2) + "%";
-
-        document.getElementById("plays").textContent =
-            Number(data.playcount).toLocaleString();
-
-        document.getElementById("level").textContent =
-            Math.floor(data.level);
-
-        document.getElementById("levelBar").style.width =
-            `${data.level % 100}%`;
-
-        if (data.country_code) {
-            document.getElementById("flag").src =
-                `https://flagsapi.com/${data.country_code}/flat/64.png`;
-        }
-
-    } catch (err) {
-
-        console.error("Osekai error:", err);
-
-    }
-}
-
-loadProfile();
-setInterval(loadProfile, 300000);
-</script>
-
-</body>
-</html>
