@@ -2,111 +2,259 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>meguri — osu! Profile</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>blewd</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
-body{background:#000;color:#fff;min-height:100vh}
-.bg{position:fixed;inset:0;background:radial-gradient(circle at top,#222,#000 60%);z-index:-2}
-.container{max-width:1200px;margin:auto;padding:24px}
-.card{background:rgba(20,20,20,.7);backdrop-filter:blur(20px);border-radius:24px;border:1px solid #222}
-.hero{padding:32px;display:flex;gap:24px;align-items:center}
-.avatar{width:140px;height:140px;border-radius:50%}
-.name{font-size:42px;font-weight:800}
-.sub{opacity:.7;display:flex;align-items:center;gap:8px}
-#flag{width:24px;height:auto;border-radius:4px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-top:20px}
-.stat{padding:20px}
-.label{opacity:.6;font-size:13px}
-.value{font-size:28px;font-weight:800;margin-top:8px}
-.section{margin-top:20px;padding:24px}
-.play{display:flex;justify-content:space-between;padding:12px;border-radius:12px;background:#111;margin-top:10px}
-.progress{height:8px;background:#222;border-radius:999px;overflow:hidden;margin-top:10px}
-.progress div{height:100%;width:0;background:#fff;transition:.3s}
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Fredoka",sans-serif;
+}
+
+body{
+    min-height:100vh;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:
+    radial-gradient(circle at top,#ffd6ec,#ffb6d9 40%,#ff95c8);
+
+    color:#fff;
+}
+
+.hearts{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+}
+
+.heart{
+    position:absolute;
+    font-size:24px;
+    animation:float linear infinite;
+    opacity:.5;
+}
+
+@keyframes float{
+    from{
+        transform:translateY(110vh) rotate(0deg);
+    }
+    to{
+        transform:translateY(-120px) rotate(360deg);
+    }
+}
+
+.container{
+    width:900px;
+    max-width:95%;
+}
+
+.logo{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.logo h1{
+    font-size:64px;
+    font-weight:600;
+    color:white;
+    text-shadow:
+    0 0 15px rgba(255,255,255,.6),
+    0 0 30px rgba(255,255,255,.3);
+}
+
+.logo p{
+    opacity:.9;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.card{
+    background:rgba(255,255,255,.25);
+    backdrop-filter:blur(18px);
+
+    border:2px solid rgba(255,255,255,.35);
+
+    border-radius:25px;
+    padding:25px;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,.15);
+}
+
+.card h2{
+    margin-bottom:15px;
+}
+
+.socials{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.social{
+    text-decoration:none;
+    color:white;
+
+    background:rgba(255,255,255,.15);
+
+    padding:14px 18px;
+    border-radius:16px;
+
+    transition:.25s;
+}
+
+.social:hover{
+    transform:translateY(-4px);
+    background:rgba(255,255,255,.3);
+}
+
+.osu{
+    display:flex;
+    gap:18px;
+    align-items:center;
+}
+
+.osu img{
+    width:90px;
+    height:90px;
+    border-radius:18px;
+}
+
+.osu-info h3{
+    font-size:28px;
+}
+
+.osu-info p{
+    opacity:.85;
+}
+
+.footer{
+    margin-top:25px;
+    text-align:center;
+    opacity:.8;
+}
+
 @media(max-width:700px){
-.hero{flex-direction:column;text-align:center}
-.sub{justify-content:center}
+
+.grid{
+    grid-template-columns:1fr;
+}
+
+.logo h1{
+    font-size:42px;
+}
+
 }
 </style>
 </head>
-
 <body>
 
-<div class="bg"></div>
+<div class="hearts" id="hearts"></div>
 
 <div class="container">
 
-<div class="card hero">
-<img class="avatar" id="avatar" src="https://a.ppy.sh/23598448">
+    <div class="logo">
+        <h1>blewd ♡</h1>
+        <p>just monika.</p>
+    </div>
 
-<div>
-<div class="name" id="username">meguri</div>
+    <div class="grid">
 
-<div class="sub">
-<img id="flag" alt="">
-<span>osu! standard player</span>
+        <div class="card">
+            <h2>Socials</h2>
+
+            <div class="socials">
+
+                <a
+                    class="social"
+                    href="https://twitter.com/tqrkeja"
+                    target="_blank"
+                >
+                    ♡ Twitter — @tqrkeja
+                </a>
+
+                <a
+                    class="social"
+                    href="https://instagram.com/chainbail"
+                    target="_blank"
+                >
+                    ♡ Instagram — @chainbail
+                </a>
+
+            </div>
+        </div>
+
+        <div class="card">
+
+            <h2>osu! Profile</h2>
+
+            <a
+                href="https://osu.ppy.sh/users/23598448"
+                target="_blank"
+                style="text-decoration:none;color:white"
+            >
+                <div class="osu">
+
+                    <img
+                        src="https://a.ppy.sh/23598448"
+                        alt="osu avatar"
+                    >
+
+                    <div class="osu-info">
+                        <h3>meguri</h3>
+                        <p>osu! standard player</p>
+                    </div>
+
+                </div>
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="footer">
+        made with love ♡
+    </div>
+
 </div>
 
-</div>
-</div>
+<script>
 
-<div class="grid">
+const hearts=document.getElementById("hearts");
 
-<div class="card stat">
-<div class="label">PP</div>
-<div class="value" id="pp">--</div>
-</div>
+for(let i=0;i<25;i++){
 
-<div class="card stat">
-<div class="label">Global Rank</div>
-<div class="value" id="rank">--</div>
-</div>
+    const h=document.createElement("div");
 
-<div class="card stat">
-<div class="label">Country Rank</div>
-<div class="value" id="countryRank">--</div>
-</div>
+    h.className="heart";
+    h.innerHTML="♡";
 
-<div class="card stat">
-<div class="label">Accuracy</div>
-<div class="value" id="acc">--</div>
-</div>
+    h.style.left=Math.random()*100+"vw";
+    h.style.animationDuration=
+        8+Math.random()*12+"s";
 
-<div class="card stat">
-<div class="label">Play Count</div>
-<div class="value" id="plays">--</div>
-</div>
+    h.style.fontSize=
+        18+Math.random()*20+"px";
 
-<div class="card stat">
-<div class="label">Level</div>
-<div class="value" id="level">--</div>
+    hearts.appendChild(h);
+}
 
-<div class="progress">
-<div id="levelBar"></div>
-</div>
+</script>
 
-</div>
-
-</div>
-
-<div class="card section">
-<h2>Top Plays</h2>
-
-<div id="topplays">
-<div class="play">
-<span>Osekai connected</span>
-<span>Profile loaded</span>
-</div>
-</div>
-
-</div>
-
-<div class="card section">
-
-<h2>Recent Plays</h2>
-
+</body>
+</html>
 <div id="recent">
 <div class="play">
 <span>Requires official osu! API</span>
