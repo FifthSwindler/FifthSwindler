@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>meguri — osu! Profile</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
 body{background:#000;color:#fff;min-height:100vh}
@@ -14,69 +15,160 @@ body{background:#000;color:#fff;min-height:100vh}
 .hero{padding:32px;display:flex;gap:24px;align-items:center}
 .avatar{width:140px;height:140px;border-radius:50%}
 .name{font-size:42px;font-weight:800}
-.sub{opacity:.7}
+.sub{opacity:.7;display:flex;align-items:center;gap:8px}
+#flag{width:24px;height:auto;border-radius:4px}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-top:20px}
-.stat{padding:20px}.label{opacity:.6;font-size:13px}.value{font-size:28px;font-weight:800;margin-top:8px}
+.stat{padding:20px}
+.label{opacity:.6;font-size:13px}
+.value{font-size:28px;font-weight:800;margin-top:8px}
 .section{margin-top:20px;padding:24px}
 .play{display:flex;justify-content:space-between;padding:12px;border-radius:12px;background:#111;margin-top:10px}
 .progress{height:8px;background:#222;border-radius:999px;overflow:hidden;margin-top:10px}
-.progress div{height:100%;width:75%;background:#fff}
-@media(max-width:700px){.hero{flex-direction:column;text-align:center}}
+.progress div{height:100%;width:0;background:#fff;transition:.3s}
+@media(max-width:700px){
+.hero{flex-direction:column;text-align:center}
+.sub{justify-content:center}
+}
 </style>
 </head>
+
 <body>
+
 <div class="bg"></div>
+
 <div class="container">
 
 <div class="card hero">
 <img class="avatar" id="avatar" src="https://a.ppy.sh/23598448">
+
 <div>
 <div class="name" id="username">meguri</div>
-<div class="sub">osu! standard player</div>
+
+<div class="sub">
+<img id="flag" alt="">
+<span>osu! standard player</span>
+</div>
+
 </div>
 </div>
 
 <div class="grid">
-<div class="card stat"><div class="label">PP</div><div class="value" id="pp">--</div></div>
-<div class="card stat"><div class="label">Global Rank</div><div class="value" id="rank">--</div></div>
-<div class="card stat"><div class="label">Country Rank</div><div class="value" id="countryRank">--</div></div>
-<div class="card stat"><div class="label">Accuracy</div><div class="value" id="acc">--</div></div>
-<div class="card stat"><div class="label">Play Count</div><div class="value" id="plays">--</div></div>
-<div class="card stat"><div class="label">Level</div><div class="value" id="level">--</div><div class="progress"><div id="levelBar"></div></div></div>
+
+<div class="card stat">
+<div class="label">PP</div>
+<div class="value" id="pp">--</div>
+</div>
+
+<div class="card stat">
+<div class="label">Global Rank</div>
+<div class="value" id="rank">--</div>
+</div>
+
+<div class="card stat">
+<div class="label">Country Rank</div>
+<div class="value" id="countryRank">--</div>
+</div>
+
+<div class="card stat">
+<div class="label">Accuracy</div>
+<div class="value" id="acc">--</div>
+</div>
+
+<div class="card stat">
+<div class="label">Play Count</div>
+<div class="value" id="plays">--</div>
+</div>
+
+<div class="card stat">
+<div class="label">Level</div>
+<div class="value" id="level">--</div>
+
+<div class="progress">
+<div id="levelBar"></div>
+</div>
+
+</div>
+
 </div>
 
 <div class="card section">
 <h2>Top Plays</h2>
+
 <div id="topplays">
-<div class="play"><span>API data will appear here</span><span>--pp</span></div>
+<div class="play">
+<span>Osekai connected</span>
+<span>Profile loaded</span>
 </div>
 </div>
 
+</div>
+
 <div class="card section">
+
 <h2>Recent Plays</h2>
+
 <div id="recent">
-<div class="play"><span>API data will appear here</span><span>--</span></div>
+<div class="play">
+<span>Requires official osu! API</span>
+<span>--</span>
 </div>
 </div>
 
-<div class="card section">
-</div>
 </div>
 
 </div>
 
 <script>
-const USER_ID = 23598448;
+async function loadProfile() {
 
-// Replace with your backend endpoint.
-// Example:
-// fetch(`/api/osu/${USER_ID}`)
+    try {
 
-async function loadProfile(){
-  console.log("API-ready");
+        const data = await fetch(
+            "https://api.osekai.net/user/get_user_info.php?user=meguri"
+        ).then(r => r.json());
+
+        document.getElementById("username").textContent =
+            data.username;
+
+        document.getElementById("avatar").src =
+            `https://a.ppy.sh/${data.id}`;
+
+        document.getElementById("pp").textContent =
+            Math.round(data.pp).toLocaleString() + "pp";
+
+        document.getElementById("rank").textContent =
+            "#" + Number(data.rank).toLocaleString();
+
+        document.getElementById("countryRank").textContent =
+            "#" + Number(data.country_rank).toLocaleString();
+
+        document.getElementById("acc").textContent =
+            Number(data.accuracy).toFixed(2) + "%";
+
+        document.getElementById("plays").textContent =
+            Number(data.playcount).toLocaleString();
+
+        document.getElementById("level").textContent =
+            Math.floor(data.level);
+
+        document.getElementById("levelBar").style.width =
+            `${data.level % 100}%`;
+
+        if (data.country_code) {
+            document.getElementById("flag").src =
+                `https://flagsapi.com/${data.country_code}/flat/64.png`;
+        }
+
+    } catch (err) {
+
+        console.error("Osekai error:", err);
+
+    }
 }
 
 loadProfile();
+setInterval(loadProfile, 300000);
 </script>
+
 </body>
 </html>
