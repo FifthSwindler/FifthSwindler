@@ -7,6 +7,7 @@
 <title>Meguri's Skin Hub</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
+
 <style>
 * {
     margin: 0;
@@ -182,27 +183,106 @@ h1 {
 }
 
 @media (max-width: 768px) {
+    body {
+        background:
+            linear-gradient(rgba(0,0,0,.25), rgba(0,0,0,.65)),
+            url("https://i.ibb.co/dJLwnJwJ/BG.jpg") center/cover fixed;
+    }
+
     main {
-        padding: 30px 15px 45px;
+        padding: 25px 15px 40px;
     }
 
-    .skin-grid {
-        grid-template-columns: 1fr;
+    .profile {
+        margin-bottom: 55px;
+        padding: 14px;
+        gap: 14px;
+        background: rgba(23,23,23,.65);
+        border-color: rgba(255,255,255,.35);
     }
 
-    .socials a {
-        padding: 12px 15px;
-    }
-}
-
-@media (max-width: 400px) {
     .profile img {
-        width: 70px;
-        height: 70px;
+        width: 75px;
+        height: 75px;
     }
 
     .profile h2 {
         font-size: 1.4rem;
+    }
+
+    .profile p,
+    .profile span {
+        font-size: .8rem;
+    }
+
+    h1 {
+        font-size: clamp(2rem, 9vw, 3rem);
+        letter-spacing: 1px;
+        line-height: 1.2;
+    }
+
+    .socials {
+        gap: 8px;
+        margin: 25px 0 40px;
+    }
+
+    .socials a {
+        padding: 11px 16px;
+        font-size: .8rem;
+    }
+
+    .section-title {
+        margin-bottom: 20px;
+        font-size: 1.2rem;
+        letter-spacing: 2px;
+    }
+
+    .skin-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        margin-bottom: 60px;
+    }
+
+    .skin-card {
+        background: rgba(0,0,0,.45);
+    }
+
+    .skin-card h2 {
+        padding: 13px;
+        font-size: 1.05rem;
+    }
+
+    .skin-preview img {
+        opacity: .9;
+    }
+}
+
+@media (max-width: 400px) {
+    main {
+        padding: 20px 12px 35px;
+    }
+
+    .profile {
+        gap: 12px;
+        padding: 12px;
+    }
+
+    .profile img {
+        width: 65px;
+        height: 65px;
+    }
+
+    .profile h2 {
+        font-size: 1.2rem;
+    }
+
+    h1 {
+        font-size: 1.9rem;
+    }
+
+    .socials a {
+        padding: 10px 13px;
+        font-size: .75rem;
     }
 }
 </style>
@@ -251,14 +331,14 @@ h1 {
 
 <div class="skin-card">
     <a class="skin-preview" href="https://www.mediafire.com/file/ii7zw14hbtkzzj1/oblivion_888.osk/file" target="_blank">
-        <img src="https://i.ibb.co/996vCq4m/screenshot329.png" alt="oblivion 888">
+        <img src="https://i.ibb.co/YBbFGnQW/screenshot324.png" alt="oblivion 888">
     </a>
     <h2>oblivion 888</h2>
 </div>
 
 <div class="skin-card">
     <a class="skin-preview" href="https://www.mediafire.com/file/701zieg4fh8ypmg/oblivion_888_dt.osk/file" target="_blank">
-        <img src="https://i.ibb.co/YBbFGnQW/screenshot324.png" alt="oblivion 888 DT">
+        <img src="https://i.ibb.co/996vCq4m/screenshot329.png" alt="oblivion 888 DT">
     </a>
     <h2>oblivion 888 DT</h2>
 </div>
